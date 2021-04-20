@@ -1,23 +1,58 @@
-//let val = { name };
-//let expr = || { val }; // Defuses the same expression
-//let late_val = expr(); // Evaluates it back
-// pub struct BoolType(Vec<bool>);
-// pub struct StringType(Vec<String>);
-// pub struct Int64Type(Vec<i64>);
-// pub struct Float64Type(Vec<f64>);
+// macro_rules! vec_str {
+//     ($($x:expr),*) => (vec![$($x.to_string()),*]);
+// }
+//fn is_date(text: &str) -> usize{
+//    let r = Regex::new(r"^\d{4}-\d{2}-\d{2}$").unwrap();
+//    let x = r.is_match(text);
+//    let lgl = if x == false { 0 } else { 1 };
+//    return lgl
+//}
+//
+//fn is_datetime(text: &str) -> usize{
+//    //grex NA Null na null "" None Na N/A NaN NAN nan
+//    let rgex = r"\s+(?=\d{2}(?:\d{2})?-\d{1,2}-\d{1,2}\b)";
+//    let r = Regex::new(rgex).unwrap();
+//    let x = r.is_match(text);
+//    let lgl = if x == false { 0 } else { 1 };
+//    return lgl
+//}
 
-macro_rules! vec_str {
-    ($($x:expr),*) => (vec![$($x.to_string()),*]);
-}
+
+//fn is_na(text: &String) -> usize{
+//    //grex NA Null na null "" None Na N/A NaN NAN nan
+//    let rgex = r"^$|^(?:N(?:(?:(?:one|AN|a[Nn]|/A)|[Aa])|ull)|n(?:ull|an?))$";
+//    let r = Regex::new(rgex).unwrap();
+//    let x = r.is_match(&text);
+//    let lgl = if x == false { 0 } else { 1 };
+//    return lgl
+//}
+//
+//// if is_na then return NA
+//fn format_if_na(text: &String) -> &str{
+//    let s = is_na(&text);
+//    // 1=missing string
+//    let missing_string_value: &str = "NA";
+//    let string: &str = if s == 1 { missing_string_value } else {text};
+//    return string
+//}
 
 fn main() {
-    let ints: Vec<i64> = vec![1; 3];
-    let strings: Vec<String> = vec_str!["a","b","c","defghijklmnop"];
-    let doubles: Vec<f64> = vec![3.14; 3];
-    let vi = ibeam::Int64Type(ints);
-    let vs = ibeam::StringType(strings);
-    let vd = ibeam::Float64Type(doubles);
-    println!("{}", vi);
-    println!("{}", vs);
-    println!("{}", vd);
+
+    //let bold_header: bool = true;
+    //let subtle: bool  = true;
+    //let neg: bool  = true;
+    //let sigfig: usize = 3;
+
+   //grex NA Null na null "" None Na N/A NaN NAN nan
+   let strings: Vec<_> = vec!["a","NaN","None","jklkjhjklhjklkj","asdfjkl"].into_iter()
+        .map(String::from)
+        .collect();
+   let floats: Vec<_> = vec!["1.0101","10101.","Na", "0.01","nan"].into_iter()
+        .map(String::from)
+        .collect();
+   
+   let vs = ibeam::StringType(strings);
+   let vf = ibeam::StringType(floats);
+
+   println!("{}\n\n{}", vs, vf);
 }
