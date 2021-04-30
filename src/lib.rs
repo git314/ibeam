@@ -1,7 +1,6 @@
 use std::fmt::{Display, Formatter, Error};
 use owo_colors::OwoColorize;
-use regex::Regex;
-
+//use regex::Regex;
 
 pub enum Num{
         Int(i32),
@@ -10,22 +9,11 @@ pub enum Num{
         NA(String)
 }
 
-
-fn is_na(text: &String) -> bool{
-    //grex NA Null na null "" None Na N/A NaN NAN nan
-    let rgex = r"^$|^(?:N(?:(?:(?:one|AN|a[Nn]|/A)|[Aa])|ull)|n(?:ull|an?)|(?:missing))$";
-    let r = Regex::new(rgex).unwrap();
-    let lgl = r.is_match(&text);
-    return lgl
-}
-
-// if is_na then return NA
-fn format_if_na(text: &String) -> &str{
-    let s = is_na(&text);
-    let missing_string_value: &str = "NA";
-    let string: &str = if s == true { missing_string_value } else {text};
-    return string
-}
+//pub struct Pillar(pub Vec<Vec<String>>);
+//impl Display for Pillar{
+//    fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
+//    }
+//}
 
 pub struct StringType(pub Vec<String>);
 impl Display for StringType{
@@ -47,7 +35,7 @@ impl Display for StringType{
         // this line is just to prevent fn fmt from throwing an error
         comma_separated.push_str(&self.0[self.0.len() - 1].to_string());
         //writeln!(f, "<pillar>\n<int>\n{}\n", comma_separated);
-        write!(f, "{}", comma_separated)
+        write!(f, "{:>}", comma_separated)
     }
 }
 
